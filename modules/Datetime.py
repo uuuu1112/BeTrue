@@ -4,8 +4,8 @@ from dateutil.relativedelta import relativedelta
 
     
 Today=datetime.today().strftime("%Y-%m-%d")
-# earningRelease=['3-31','5-15','8-14','11-14'] 要有爬蟲版本
-earningRelease=['3-31','06-30','09-30','12-31']
+earningRelease=['5-15','8-14','11-14','3-31'] 
+earningQtrDate=['3-31','06-30','09-30','12-31']
 
 class DateManage:
     # 把財報發布的日期換算成天數
@@ -66,13 +66,12 @@ class EarnDate(DateManage):
     # 最近四季的財報發布日
     def earningReleaseDate(self,today=Today):
         content=[]
-        # earningRelease=['3-31','5-15','8-14','11-14']
-        for i in range(len(earningRelease)):
+        for i in range(4):
             if i>=self.checkSeason(today):
-                earningReleaseConvert=str(datetime.today().year-1)+"-"+earningRelease[i]
+                earningReleaseConvert=str(datetime.today().year-1)+"-"+earningQtrDate[i]
                 content.append(earningReleaseConvert)
-        for i in range(len(earningRelease)):
+        for i in range(4):
             if i<self.checkSeason(today):
-                earningReleaseConvert=str(datetime.today().year)+"-"+earningRelease[i]
+                earningReleaseConvert=str(datetime.today().year)+"-"+earningQtrDate[i]
                 content.append(earningReleaseConvert)
         return content
